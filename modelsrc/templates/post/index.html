@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Posts {% endblock %}
+
+{% block body %}
+{# <a href="/post/detail/{{ post.id }}">{{ post.title }}</a><br> --yorum satiri django #}
+{#<a href="{% url 'detail' id=post.id %}">{{ post.title }}</a><br> -- 2. adim#}
+  {% for post in posts %}
+    <br>
+    <div class="container">
+        <div class="row">
+          <div style="margin-top: 5px;">
+            <div style="margin-bottom: 5px;">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary" type="button">
+                    <a href="{{post.get_index}}" style="text-decoration: none; color: white;">Geri</a>
+                </button>
+              </div>
+            </div>
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                  <div class="card mb-3">
+                    <div class="card-header">
+                      <button type="button" class="btn btn-outline-success">
+                        POST ID : {{ post.id }}
+                      </button>
+                    </div>
+                    <div style="position: relative; text-align: center;">
+                        {% if post.image %}
+                          <img src="{{ post.image.url }}" class="card-img-top" style="width: 150px; height: 100px;">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ post.title }}</h5>
+                      <p class="card-text">{{ post.content }}</p>
+                    </div>
+                    <hr>
+                    {% if request.user.is_authenticated %}
+                      <div style="margin-bottom: 10px;">
+                        <button type="button" class="btn btn-outline-info">
+                          <a href="{{ post.get_absolute_url }}" style="text-decoration: none;">Incele</a>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning">
+                          <a href="{{ post.get_update_post }}" style="text-decoration: none;">Guncelle</a>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger">
+                          <a href="{{ post.get_delete_post }}" style="text-decoration: none;">Sil</a>
+                        </button>
+                      </div>
+                    {% endif %}
+                  </div>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                  Publishing Date Posts : <cite title="Source Title">{{ post.publishing_date }}</cite>
+                </figcaption>
+            </figure>
+          </div>
+        </div>
+    </div><br>
+    <br><br>
+
+  {% endfor %} 
+
+{% endblock %}

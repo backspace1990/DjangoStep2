@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home App {% endblock %}
+
+{% block body %}
+    <h1 style="background-color: antiquewhite;">Hosgeldiniz burasi ana sayfa<br>Sayfanin dev'i {{user}}</h1>
+    <div style="position: relative; text-align: center;"><img src="{% static 'homeApp/Django.jpeg' %}" width="600px"></div>
+    <div style="position: relative; text-align: center;"><img src="{% static 'postApp/lifecycle_Django.jpeg' %}" width="600px"></div>
+{% endblock %}
