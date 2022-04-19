@@ -9,6 +9,7 @@
 #   . Resim vb.
 # bilgilere ihtiyac vardir. Model katmani bu bilgilerin 
 # ve daha fazlasinin tanimlandigi yerdir. 
+from importlib.resources import contents
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -59,3 +60,12 @@ class Post(models.Model):
         ordering = ["publishing_date", "id"] #burada Meta clasimizi publishing_date ye bagli kildik. yani en eskiden simdiye,  -publishing_date yazinca tam tersi
         #ordering = ["-id"]
         #ordering = ["publishing_date", "id"] # boyle olunca tarihi ayni olanlarin id alanlarina bakilir
+
+
+
+class Comment(models.Model):
+
+    post = models.ForeignKey('post.Post', related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, verbose_name='Isim')
+    content = models.TextField(verbose_name='Yorum')
+    created_date = models.DateTimeField(auto_now_add=True)

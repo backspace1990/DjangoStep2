@@ -12,7 +12,7 @@ from django.http import Http404
 
 # Migrations : Uygulamanin veritabanini tutan yerdir. 
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
 
@@ -24,8 +24,17 @@ def post_index(request):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.save()
+        return HttpResponseRedirect(post.get_absolute_url())
+
     context = {
-        'post':post
+        'post':post,
+        'form':form,
     }
     return render(request, 'post/detail.html', context)
 

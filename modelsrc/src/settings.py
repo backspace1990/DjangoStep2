@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_cleanup.apps.CleanupConfig',#kaldirilan resimli postun silinmesi durumunda resmin de silinmesini saglar
     'ckeditor',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,6 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+RECAPTCHA_PUBLIC_KEY = 'MyRecaptchaKey123'
+RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'
