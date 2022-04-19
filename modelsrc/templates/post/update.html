@@ -11,6 +11,7 @@
                         {% csrf_token %}
                         <h1>Form</h1>
                         {{ form|crispy }}
+                        {{ form.media }}
                         <br>
                         <input type="submit" value="GONDER" class="btn btn-primary">
                     </form>

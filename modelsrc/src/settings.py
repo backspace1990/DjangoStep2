@@ -130,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'static']
 
-#STATIC_ROOT = BASE_DIR / "benim staticlerim"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 #
 #MEDIA_ROOT = BASE_DIR / "uploads"
 #MEDIA_URL = "/images/"
@@ -143,3 +143,12 @@ MEDIA_URL = "/images/"
 MEDIA_ROOT = BASE_DIR / "uploads"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+CKEDITOR_JQUERY_URL = 'static/js/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}

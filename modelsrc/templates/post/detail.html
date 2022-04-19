@@ -23,14 +23,14 @@
                                     POST ID : {{ post.id }}
                                 </button>
                             </div>
-                            <div style="position: relative; text-align: center;">
+                            <div style="position: relative; text-align: center; margin-top: 5px;">
                                 {% if post.image %}
                                   <img src="{{ post.image.url }}" class="card-img-top" style="width: 500px; height: 300px;">
                                 {% endif %}
                             </div>
                             <div class="card-body">
                               <h5 class="card-title">{{ post.title }}</h5>
-                              <p class="card-text">{{ post.content }}</p>
+                              <p class="card-text">{{ post.content|safe }}</p>
                             </div>
                             <hr>
                             {% if request.user.is_authenticated %}
@@ -50,6 +50,7 @@
                     </blockquote>
                     <figcaption class="blockquote-footer">
                       Publishing Date Posts : <cite title="Source Title">{{ post.publishing_date }}</cite>
+                      <h5>Yazar : <cite title="Source Title">{{ post.user.get_full_name }}</cite></h5>
                     </figcaption>
                 </figure>
             </div>

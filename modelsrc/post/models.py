@@ -1,7 +1,4 @@
-from math import e
-from django.db import models
-from django.shortcuts import redirect
-
+#from django.db import models
 # Create your models here.
 # Veritabani nesnelerinin olusturdugumuz 
 # ve sorgulama yaptigimiz katmandir. 
@@ -12,13 +9,17 @@ from django.shortcuts import redirect
 #   . Resim vb.
 # bilgilere ihtiyac vardir. Model katmani bu bilgilerin 
 # ve daha fazlasinin tanimlandigi yerdir. 
+from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
+
 
 
 class Post(models.Model):
+    user = models.ForeignKey('auth.User', verbose_name='Yazar', on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=120,verbose_name='Baslik')
-    content = models.TextField(verbose_name='Icerik')
+    content = RichTextField(verbose_name='Icerik')
     publishing_date = models.DateTimeField(verbose_name='Yayimlanma Tarihi', auto_now_add=True)
     image = models.ImageField(null=True, blank=True)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
