@@ -61,7 +61,33 @@
         </div>
     </div><br>
     <br><br>
-
-  {% endfor %} 
-
+  {% endfor %}
+  <hr> 
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {% if posts.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Previous</a>
+        </li>
+      {% endif %}
+      {% if posts.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts.has_previous }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">1</a>
+        </li>
+      {% endif %}
+      {% if posts.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ posts.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Last</a>
+        </li>
+      {% endif %}
+      <li class="page-item">
+        <a class="page-link" href="#">
+          Page {{ posts.number }} of {{ posts.paginator.num_pages }}. Return to top! 
+        </a>
+      </li>
+    </ul>
+  </nav>     
 {% endblock %}

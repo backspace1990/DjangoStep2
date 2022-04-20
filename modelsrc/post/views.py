@@ -1,3 +1,4 @@
+from importlib.resources import contents
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect
 from django.http import Http404
 
@@ -15,10 +16,31 @@ from .models import Post
 from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.utils.text import slugify
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
 
 def post_index(request):
-    posts = Post.objects.all()
+    posts_list = Post.objects.all()
+    query = request.GET.get('q')
+    if query:
+        posts_list = posts_list.filter(
+            Q(title__icontains=query)|
+            Q(content__icontains=query)|
+            Q(user__first_name__icontains=query)|
+            Q(user__last_name__icontains=query)).distinct()
+
+    paginator = Paginator(posts_list, 3)
+
+    page = request.GET.get('page')
+    
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
     return render(request, 'post/index.html', {'posts': posts})
 
 
