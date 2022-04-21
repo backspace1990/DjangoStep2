@@ -38,7 +38,7 @@
 
           <span class="block_account" style="padding-left: 30px;">
             {% if request.user.is_authenticated %}
-              <button type="button" class="btn btn-outline-danger"><a href="{% url 'accounts:logout' %}" style="color: white;">Выход</a></button>
+              <button type="button" class="btn btn-outline-danger"><a href="{% url 'accounts:logout' %}" style="color: white;">Cikis</a></button>
             {% else %}
               <button type="button" class="btn btn-outline-primary"><a href="{% url 'accounts:login' %}" style="color: white;">Giris</a></button>
               <button type="button" class="btn btn-outline-success"><a href="{% url 'accounts:register' %}" style="color: white;">Kayit</a></button>
