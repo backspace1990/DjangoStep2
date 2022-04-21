@@ -155,3 +155,5 @@ CKEDITOR_CONFIGS = {
 }
 
 
+#RECAPTCHA_PUBLIC_KEY = 'MyRecaptchaKey123'
+#RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'

@@ -47,15 +47,14 @@
                             <hr>
                             {% if request.user.is_authenticated %}
                               <div style="margin-bottom: 10px;">
-                                <button type="button" class="btn btn-outline-info">
-                                  <a href="{{ post.get_absolute_url }}" style="text-decoration: none;">Incele</a>
-                                </button>
-                                <button type="button" class="btn btn-outline-warning">
-                                  <a href="{{ post.get_update_post }}" style="text-decoration: none;">Guncelle</a>
-                                </button>
-                                <button type="button" class="btn btn-outline-danger">
-                                  <a href="{{ post.get_delete_post }}" style="text-decoration: none;">Sil</a>
-                                </button>
+                                {% if request.user.get_username == post.user.get_username %}
+                                  <button type="button" class="btn btn-outline-warning">
+                                    <a href="{{ post.get_update_post }}" style="text-decoration: none;">Guncelle</a>
+                                  </button>
+                                  <button type="button" class="btn btn-outline-danger">
+                                    <a href="{{ post.get_delete_post }}" style="text-decoration: none;">Sil</a>
+                                  </button>
+                                {% endif %}
                               </div>
                             {% endif %}
                         </div>

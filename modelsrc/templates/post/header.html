@@ -20,13 +20,10 @@
                       {% if request.user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'post:create' %}">Add-New-Post</a></li>
                       {% endif %}
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">YENILENIR</a></li>
                     </ul>
                   </li>
                   <li class="nav-item"></li><a class="nav-link" href="#">MESSAGES</a></li>
                   <li class="nav-item"></li><a class="nav-link" href="#">CALL</a></li>
-                  <li class="nav-item"></li><a class="nav-link" href="#">Subscribe</a></li>
                 </nav>
               </div>
         </ul>
@@ -39,6 +36,14 @@
               <span class="visuallyhidden">Search</span>
             </button>
 
+          <span class="block_account" style="padding-left: 30px;">
+            {% if request.user.is_authenticated %}
+              <button type="button" class="btn btn-outline-danger"><a href="{% url 'accounts:logout' %}" style="color: white;">Выход</a></button>
+            {% else %}
+              <button type="button" class="btn btn-outline-primary"><a href="{% url 'accounts:login' %}" style="color: white;">Giris</a></button>
+              <button type="button" class="btn btn-outline-success"><a href="{% url 'accounts:register' %}" style="color: white;">Kayit</a></button>
+            {% endif %}
+        </span>
         </form>
     </div>
   </div>
